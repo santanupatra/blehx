@@ -109,11 +109,15 @@
 					<div class="panel-body">
 						@la_display($module, 'name')
 						@la_display($module, 'sku')
+						@la_display($module, 'weight')
 						@la_display($module, 'price')
 						@la_display($module, 'description')
 						@la_display($module, 'quantity')
-						@la_display($module, 'image')
 						@la_display($module, 'category_id')
+						@la_display($module, 'status')
+						@la_display($module, 'payment')
+						@la_display($module, 'overview')
+						@la_display($module, 'warranty')
 					</div>
 				</div>
 			</div>

@@ -53,17 +53,19 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 				<h4 class="modal-title" id="myModalLabel">Add Category</h4>
 			</div>
-			{!! Form::open(['action' => 'LA\CategoriesController@store', 'id' => 'category-add-form']) !!}
+			{!! Form::open(['action' => 'LA\CategoriesController@store', 'id' => 'category-add-form', 'enctype' => 'multipart/form-data']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     @la_form($module)
 					
 					{{--
-					@la_input($module, 'image')
 					@la_input($module, 'name')
 					@la_input($module, 'description')
 					@la_input($module, 'active')
 					--}}
+					<div class="form-group"><label for="image" style="display:block;">Image* :</label>
+					 <input type="file" name="image" id="image">			 
+					</div>
 				</div>
 			</div>
 			<div class="modal-footer">

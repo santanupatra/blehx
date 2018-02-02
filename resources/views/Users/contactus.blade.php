@@ -28,31 +28,31 @@
         <div class="cus-formdiv">
           <h5>Fill Here</h5>
 
-          <form action="#" method="get">
+          {!! Form::open(['url' => 'user/sendmail','method'=>'post','onsubmit'=>'return validation();']) !!}
             <div class="form-group">
-              <input type="text" name="txt" class="form-control" placeholder="Name" />
+              <input type="text" name="name" class="form-control" placeholder="Name" required id="name" />
             </div>
 
             <div class="form-group">
-              <input type="email" name="mail" class="form-control" placeholder="Email" />
+            <input type="email" class="form-control" placeholder="Email-id..." required name="email" id="email">
             </div>
 
             <div class="form-group">
-              <input type="tel" name="contact" class="form-control" placeholder="Phone" />
+               <input type="tel" class="form-control" placeholder="Phone" required name="phone" id="phone">
             </div>
 
             <div class="form-group">
-              <input type="text" name="contact" class="form-control" placeholder="Title" />
+            <input type="text" class="form-control" placeholder="Title" required name="title" id="title">
             </div>
 
             <div class="form-group">
-              <textarea class="form-control" rows="7" placeholder="Message"></textarea>
+              <textarea class="form-control" rows="7" placeholder="Message" name="message"></textarea>
             </div>
 
             <div class="form-group">
-              <a href="#" class="btn btn-success text-center text-capitalize">Send</a>  
+              <button type="submit" class="btn btn-success text-center text-capitalize" data-toggle="modal">Send</button>
             </div>
-          </form>
+          {!! Form::close() !!}
         </div>
       </div>
     </div>

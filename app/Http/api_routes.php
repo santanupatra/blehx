@@ -7,6 +7,11 @@ Route::group(['prefix' => 'api'], function () {
     Route::Get('/category', 'API\ProductsController@productCategory');
     Route::Post('/veriefyotp', 'API\UsersController@veriefyotp');
     Route::Post('/product', 'API\ProductsController@productList');
+    Route::Post('/productDetails', 'API\ProductsController@productDetails');
+    Route::Post('/productAddCart', 'API\ProductsController@productAddCart');
+    Route::Post('/productCart', 'API\ProductsController@productCart');
+    
+    
     
 });
 

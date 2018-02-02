@@ -20,24 +20,24 @@ class Controller extends BaseController
 {
     public function __construct() {
         $img_path=Config::get('constants.IMGPATH');
-        $site_setting=Site_Setting::with("imgpath")->first();
+        $site_setting= Site_Setting::select("*")->where(['id' => 1])->select('*')->first();
+        /*$site_setting=Site_Setting::with("imgpath")->first();
         $logo_path=$site_setting->imgpath->path;
-        $site_setting->imgpath->path=$img_path.pathinfo($logo_path, PATHINFO_BASENAME);
-        $user=Auth::user();
+        $site_setting->imgpath->path=$img_path.pathinfo($logo_path, PATHINFO_BASENAME);*/
+        $user=Auth::user();        
         if(!empty($user))
         {
-            $logged_user=User::with('imgpath')
-            ->where("id","=",$user->id)->first();
+            $logged_user=User::select('*')->where("id","=",$user->id)->first();
 
-            $logged_user->image=!empty($logged_user->imgpath->path)?
-            $img_path.pathinfo($logged_user->imgpath->path, PATHINFO_BASENAME):$img_path.'nouser.png';
+            //$logged_user->image=!empty($logged_user->imgpath->path)?
+            //$img_path.pathinfo($logged_user->imgpath->path, PATHINFO_BASENAME):$img_path.'nouser.png';
 
         }
         else{
           $logged_user=array();  
       }
 
-      if(Auth::user())
+      /*if(Auth::user())
         {
           $dbquery = Campaign::with('imgpath')
           ->whereNull('deleted_at')
@@ -56,7 +56,7 @@ class Controller extends BaseController
             })
               );
           view()->share('campigns', $campigns); 
-      }
+      }*/
 
       view()->share('site_setting', $site_setting); 
       view()->share('logged_user', $logged_user);

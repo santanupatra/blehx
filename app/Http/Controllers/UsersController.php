@@ -55,10 +55,49 @@ class UsersController extends Controller
     }
 
     public function contactus()
-    {
+    {      
       return view('Users/contactus');     
     }
-    
+
+    public function sendmail(Request $request)
+    {
+      $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+        ]);
+
+        if ($validator->fails())
+        {
+          return redirect('contactus')
+            ->withErrors($validator)
+            ->withInput();
+        }
+        else
+        {
+           $data = request()->all();
+           $name = $data['name'];
+           $email = $data['email'];
+           $phone = $data['phone'];
+           $title = $data['title'];
+           $message = $data['message'];
+           //$site_setting=Site_Setting::with("imgpath")->first();
+           $site_setting = DB::table('site_settings')->where("id","=",1)->select('admin_email')->first();           
+           $email_tpl = DB::table('email_templates')->where("id","=",8)->first();
+           //$logo_path=$site_setting->imgpath->path;
+           //$LOGO=$img_path.pathinfo($logo_path, PATHINFO_BASENAME);
+           //$link=$SITEURL.'user/active/'.base64_encode($insertedId);
+           $msg= str_replace(array('[NAME]','[EMAIL]','[PHONE]','[SUBJECT]','[MESSAGE]'),array($name, $email, $phone, $title, $message),$email_tpl->content); 
+           $html = array('from' => $site_setting->admin_email, 'to' => $email,'subject'=>$email_tpl->subject,'content'=>$msg);
+           Mail::send(array(),array(), function ($message) use ($html){
+            $message->to($html['to'])
+              ->subject($html['subject'])
+              ->from($html['from'])
+              ->setBody($html['content'], 'text/html');
+          });
+          return redirect()->back()->with('message', 'You have been successfull submited the form.');
+        }
+    }
     public function signup()
     {
         $roleCount = \App\Role::count();
@@ -78,8 +117,7 @@ class UsersController extends Controller
     {
         $img_path=Config::get('constants.IMGPATH');
         $SITEURL=Config::get('constants.SITEURL');        
-        $validator = Validator::make($request->all(), [
-            'first_name' => 'required',
+        $validator = Validator::make($request->all(), [            
             'email' => 'required|unique:users',
             'password' => 'required',
         ]);
@@ -92,15 +130,18 @@ class UsersController extends Controller
         }
         else
         {
-           $data = request()->all();
-           $user=User::create($data);
+           $data = request()->all();           
+           $user['email'] = $data['email'];
+           $user['password'] = bcrypt($data['password']);
+           $user=User::create($user);
            $insertedId = $user->id;
            $email_tpl = DB::table('email_templates')->where("id","=",1)->first();
-           $site_setting=Site_Setting::with("imgpath")->first();
-           $logo_path=$site_setting->imgpath->path;
-           $LOGO=$img_path.pathinfo($logo_path, PATHINFO_BASENAME);
+           // $site_setting=Site_Setting::with("imgpath")->first();
+           $site_setting = DB::table('site_settings')->where("id","=",1)->first();
+           //$logo_path=$site_setting->imgpath->path;
+           //$LOGO=$img_path.pathinfo($logo_path, PATHINFO_BASENAME);
            $link=$SITEURL.'user/active/'.base64_encode($insertedId);
-           $msg= str_replace(array('[LOGO]','[NAME]','[LINK]'),array($LOGO,$user->first_name,$link),$email_tpl->content); 
+           $msg= str_replace(array('[NAME]','[LINK]'),array($user->first_name,$link),$email_tpl->content); 
            $html = array('from' => $site_setting->admin_email, 'to' => $user->email,'subject'=>$email_tpl->subject,'content'=>$msg);
            Mail::send(array(),array(), function ($message) use ($html){
             $message->to($html['to'])
@@ -147,13 +188,13 @@ class UsersController extends Controller
             $user=Auth::user();
             if($user->is_active)
             {
-              if($user->type=='C')
+              if($user->type=='S')
               {
-                return  redirect()->action('UsersController@charityprofile');           
+                 return  redirect()->action('UsersController@sellerDashboard')->withMessage("You have been Logged in successfully!");           
               }
               else
               {
-                return  redirect()->action('UsersController@profile')->withMessage("You have been Logged in successfully!");           
+                return  redirect()->action('UsersController@userDashboard')->withMessage("You have been Logged in successfully!");           
               }
             }
             else
@@ -200,6 +241,9 @@ class UsersController extends Controller
     {
        return view('Users/signincamp');
     }
+    public function userDashboard(){
+      return view('Users/user_dashboard');
+    }
     
     function actionsignincamp(Request $request)
     {
@@ -235,7 +279,7 @@ class UsersController extends Controller
     public function logout() 
     {
        Auth::logout();
-       return  redirect()->action('UsersController@signin');           
+       return  redirect()->action('HomeController@index');           
     }
     
 

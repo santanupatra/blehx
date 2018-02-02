@@ -18,7 +18,6 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Module::generate("Categories", 'categories', 'name', 'fa-cube', [
-            ["image", "Image", "Image", false, "", 0, 0, true],
             ["name", "Name", "TextField", true, "", 0, 256, true],
             ["description", "Description", "Textarea", false, "", 0, 0, true],
             ["active", "Active", "Dropdown", false, "yes", 0, 0, false, ["yes","no"]],

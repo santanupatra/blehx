@@ -18,14 +18,12 @@ use Dwij\Laraadmin\Models\Module;
 use Dwij\Laraadmin\Models\ModuleFields;
 
 use App\Models\Product;
-use App\Models\Category;
-
 
 class ProductsController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'name';
-	public $listing_cols = ['id', 'name', 'sku', 'price', 'description', 'quantity', 'image', 'category_id'];
+	public $listing_cols = ['id', 'name', 'sku', 'weight', 'price', 'description', 'quantity', 'category_id', 'status', 'payment', 'overview', 'warranty'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
@@ -88,7 +86,27 @@ class ProductsController extends Controller
 			}
 			
 			$insert_id = Module::insert("Products", $request);
-			
+			//---------------------------
+				$file = $request->file('image') ;
+				
+	            if(!empty($file))
+	            {
+	              $imageName = uniqid().'.'.$file->getClientOriginalExtension();
+	              $destinationPath = storage_path('/uploads/product');
+	              $file->move($destinationPath, $imageName);
+	              $upload_data["name"]=$file->getClientOriginalName();
+	              $upload_data["path"]=storage_path().'uploads/product/'.$imageName;
+	              $upload_data["extension"]=$file->getClientOriginalExtension();
+	              
+	              //$upload=Upload::create($upload_data);
+	              //$request["image"]=$upload_data["name"];
+	              $data['image'] = $imageName;
+	               $update_pass = DB::table('products')
+                    ->where('id', $insert_id)
+                    ->update($data);
+	            }            
+	            
+			//-------------------------------
 			return redirect()->route(config('laraadmin.adminRoute') . '.products.index');
 			
 		} else {
@@ -136,18 +154,15 @@ class ProductsController extends Controller
 	 */
 	public function edit($id)
 	{
-
 		if(Module::hasAccess("Products", "edit")) {			
 			$product = Product::find($id);
 			if(isset($product->id)) {	
 				$module = Module::get('Products');
 				
 				$module->row = $product;
-				$category_list=Category::select('*')->get();
 				
 				return view('la.products.edit', [
 					'module' => $module,
-					'categories' => $category_list,
 					'view_col' => $this->view_col,
 				])->with('product', $product);
 			} else {
@@ -182,6 +197,28 @@ class ProductsController extends Controller
 			
 			$insert_id = Module::updateRow("Products", $request, $id);
 			
+			//---------------------------
+				$file = $request->file('image') ;
+				
+	            if(!empty($file))
+	            {
+	              $imageName = uniqid().'.'.$file->getClientOriginalExtension();
+	              $destinationPath = storage_path('/uploads/product');
+	              $file->move($destinationPath, $imageName);
+	              $upload_data["name"]=$file->getClientOriginalName();
+	              $upload_data["path"]=storage_path().'uploads/product/'.$imageName;
+	              $upload_data["extension"]=$file->getClientOriginalExtension();
+	              
+	              //$upload=Upload::create($upload_data);
+	              //$request["image"]=$upload_data["name"];
+	              $data['image'] = $imageName;
+	               $update_pass = DB::table('products')
+                    ->where('id', $insert_id)
+                    ->update($data);
+	            }            
+	            
+			//-------------------------------
+
 			return redirect()->route(config('laraadmin.adminRoute') . '.products.index');
 			
 		} else {

@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/font-awesome-4.7.0/css/font-awesome.min.css') }}" type="text/css">
     <link rel="icon" href="{{ URL::asset('assets/img/fav-icon.png') }}" type="image/png" sizes="32x32">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}" type="text/css">
-
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/tabbed.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/blue.css') }}" type="text/css">
+     <script type="text/javascript" src="{{ URL::asset('assets/js/jquery-1.10.1.min.js') }}"></script>
     <style type="text/css">
       .scrollup{
           width:40px;
@@ -33,17 +35,7 @@
           display:none;     
           background: url('{{ URL::asset('assets/img/icon_top.png') }}') no-repeat;
         }
-
-      .loader {
-          position: fixed;
-          left: 0px;
-          top: 0px;
-          width: 100%;
-          height: 100%;
-          z-index: 9999;
-          background: url('{{ URL::asset('assets/img/pageLoader.gif') }}') 50% 50% no-repeat rgb(255,255,255);
-          opacity: 1;
-      }       
+          
   </style>
   </head>
   <body>
@@ -56,7 +48,8 @@
    @include('partials.footer')
 
    <a href="#" class="scrollup" style="display: none;">Scroll</a>
-    <script type="text/javascript" src="{{ URL::asset('assets/js/jquery-1.10.1.min.js') }}"></script>
+   
+  
     <script type="text/javascript" src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('assets/js/wowslider.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('assets/js/script.js') }}"></script>

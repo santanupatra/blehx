@@ -29,18 +29,22 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($product, ['route' => [config('laraadmin.adminRoute') . '.products.update', $product->id ], 'method'=>'PUT', 'id' => 'product-edit-form']) !!}
-					@la_form($module)
-					
+				{!! Form::model($product, ['route' => [config('laraadmin.adminRoute') . '.products.update', $product->id ], 'method'=>'PUT', 'id' => 'product-edit-form', 'enctype' => 'multipart/form-data']) !!}
+					@la_form($module)					
 					{{--
 					@la_input($module, 'name')
 					@la_input($module, 'sku')
+					@la_input($module, 'weight')
 					@la_input($module, 'price')
-					@la_input($module, 'description')
 					@la_input($module, 'quantity')
-					@la_input($module, 'image')
 					@la_input($module, 'category_id')
+					@la_input($module, 'status')					
 					--}}
+					<div class="form-group"><label for="image" style="display:block;">Image* :</label>
+					 <input type="file" name="image" id="image">
+					 <div style="padding-top: 10px"></div>
+					 <img src="{{ URL::asset('../storage/uploads/product/') }}/{{$product->image}}" alt="" width="150">	
+					</div>
                     <br>
 					<div class="form-group">
 						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/products') }}">Cancel</a></button>

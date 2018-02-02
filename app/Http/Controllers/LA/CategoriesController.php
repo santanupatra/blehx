@@ -23,7 +23,7 @@ class CategoriesController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'name';
-	public $listing_cols = ['id', 'image', 'name', 'description', 'active'];
+	public $listing_cols = ['id', 'name', 'description', 'active'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns
@@ -86,7 +86,27 @@ class CategoriesController extends Controller
 			}
 			
 			$insert_id = Module::insert("Categories", $request);
-			
+			//---------------------------
+				$file = $request->file('image') ;
+				
+	            if(!empty($file))
+	            {
+	              $imageName = uniqid().'.'.$file->getClientOriginalExtension();
+	              $destinationPath = storage_path('/uploads/category');
+	              $file->move($destinationPath, $imageName);
+	              $upload_data["name"]=$file->getClientOriginalName();
+	              $upload_data["path"]=storage_path().'uploads/category/'.$imageName;
+	              $upload_data["extension"]=$file->getClientOriginalExtension();
+	              
+	              //$upload=Upload::create($upload_data);
+	              //$request["image"]=$upload_data["name"];
+	              $data['image'] = $imageName;
+	               $update_pass = DB::table('categories')
+                    ->where('id', $insert_id)
+                    ->update($data);
+	            }            
+	            
+			//-------------------------------
 			return redirect()->route(config('laraadmin.adminRoute') . '.categories.index');
 			
 		} else {
@@ -176,7 +196,26 @@ class CategoriesController extends Controller
 			}
 			
 			$insert_id = Module::updateRow("Categories", $request, $id);
-			
+			//---------------------------
+				$file = $request->file('image') ;
+	            if(!empty($file))
+	            {
+	              $imageName = uniqid().'.'.$file->getClientOriginalExtension();
+	              $destinationPath = storage_path('/uploads/category');
+	              $file->move($destinationPath, $imageName);
+	              $upload_data["name"]=$file->getClientOriginalName();
+	              $upload_data["path"]=storage_path().'uploads/category/'.$imageName;
+	              $upload_data["extension"]=$file->getClientOriginalExtension();
+	              
+	              //$upload=Upload::create($upload_data);
+	              //$request["image"]=$upload_data["name"];
+	              $data['image'] = $imageName;
+	               $update_pass = DB::table('categories')
+                    ->where('id', $insert_id)
+                    ->update($data);
+	            }            
+	            
+			//-------------------------------
 			return redirect()->route(config('laraadmin.adminRoute') . '.categories.index');
 			
 		} else {

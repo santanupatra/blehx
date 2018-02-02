@@ -59,55 +59,21 @@ class ContentsController extends Controller
         return view('Contents/howit',compact("how_it_work"));
     }
     
-    public function charter()
+    public function ourOffer()
     {
-             return view('Contents/charter');
+        return view('Contents/our_offer');
+    }
+
+    public function services()
+    {
+        return view('Contents/services');
+    }
+
+    public function datacenter()
+    {
+        return view('Contents/datacenter');
     }
     
-    public function press()
-    {
-             return view('Contents/press');
-    }
-
-    public function blog()
-    {
-             return view('Contents/blog');
-    }
-
-
-    public function awards()
-    {
-             return view('Contents/awards');
-    }
-
-    public function guestposts()
-    {
-             return view('Contents/guestPosts');
-    }
-
-    public function news()
-    {
-             return view('Contents/news');
-    }
-
-    public function profile()
-    {
-             return view('Contents/profiles');
-    }
-
-    public function tips()
-    {
-             return view('Contents/tips');
-    }
-
-    public function video()
-    {
-             return view('Contents/video');
-    }
-
-    public function community()
-    {
-             return view('Contents/community');
-    }
+   
 
 }

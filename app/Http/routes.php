@@ -16,6 +16,17 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('/signup','UsersController@prising');
     Route::get('/prising','UsersController@prising');
     Route::get('/contactus','UsersController@contactus');
+    Route::post('/user/sendmail','UsersController@sendmail');
+    Route::post('/user/store','UsersController@store');
+    Route::get('/user/active/{id}','UsersController@active');
+    Route::post('/user/actionsignin','UsersController@actionsignin');
+    Route::get('/user/dashboard','UsersController@userDashboard');
+    Route::get('/seller/dashboard','UsersController@sellerDashboard');
+    Route::get('our_offer','ContentsController@ourOffer');
+    Route::get('services','ContentsController@services');
+    Route::get('datacenters','ContentsController@datacenter');
+    Route::get('products','ProductsController@index');
+    Route::get('product/details/{id}','ProductsController@details');
     
 });
 

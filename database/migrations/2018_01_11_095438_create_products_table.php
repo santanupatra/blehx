@@ -20,11 +20,15 @@ class CreateProductsTable extends Migration
         Module::generate("Products", 'products', 'name', 'fa-truck', [
             ["name", "Name", "Name", false, "", 5, 255, true],
             ["sku", "SKU", "Name", false, "", 1, 200, true],
+            ["weight", "Weight", "TextField", false, "", 3, 200, false],
             ["price", "Price", "Decimal", false, "0", 1, 200, true],
             ["description", "Description", "Textarea", false, "", 0, 0, false],
             ["quantity", "Quantity", "Decimal", false, "0", 1, 200, false],
-            ["image", "Image", "Files", false, "", 0, 0, false],
-            ["category_id", "Category", "Dropdown", false, "", 0, 0, false, "null"],
+            ["category_id", "Category", "Dropdown", false, "", 0, 0, false, "@categories"],
+            ["status", "Status", "Radio", false, "Yes", 0, 0, false, ["Yes","No"]],
+            ["payment", "Payment", "Textarea", false, "", 0, 0, false],
+            ["overview", "Overview", "Textarea", false, "", 0, 0, false],
+            ["warranty", "Warranty", "Textarea", false, "", 0, 0, false],
         ]);
 		
 		/*

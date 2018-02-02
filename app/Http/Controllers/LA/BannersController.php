@@ -74,9 +74,11 @@ class BannersController extends Controller
 	 * @return \Illuminate\Http\Response
 	 */
 	public function store(Request $request)
-	{
-		if(Module::hasAccess("Banners", "create")) {
+	{	
 		
+		if(Module::hasAccess("Banners", "create")) {
+			//$data = request()->all();
+			
 			$rules = Module::validateRules("Banners", $request);
 			
 			$validator = Validator::make($request->all(), $rules);
@@ -87,6 +89,27 @@ class BannersController extends Controller
 			
 			$insert_id = Module::insert("Banners", $request);
 			
+			//---------------------------
+				$file = $request->file('image') ;
+				
+	            if(!empty($file))
+	            {
+	              $imageName = uniqid().'.'.$file->getClientOriginalExtension();
+	              $destinationPath = storage_path('/uploads');
+	              $file->move($destinationPath, $imageName);
+	              $upload_data["name"]=$file->getClientOriginalName();
+	              $upload_data["path"]=storage_path().'uploads/'.$imageName;
+	              $upload_data["extension"]=$file->getClientOriginalExtension();
+	              
+	              //$upload=Upload::create($upload_data);
+	              //$request["image"]=$upload_data["name"];
+	              $data['image'] = $imageName;
+	               $update_pass = DB::table('banners')
+                    ->where('id', $insert_id)
+                    ->update($data);
+	            }            
+	            
+			//-------------------------------
 			return redirect()->route(config('laraadmin.adminRoute') . '.banners.index');
 			
 		} else {
@@ -165,8 +188,9 @@ class BannersController extends Controller
 	 */
 	public function update(Request $request, $id)
 	{
-		if(Module::hasAccess("Banners", "edit")) {
-			
+		//$data = request()->all();
+
+		if(Module::hasAccess("Banners", "edit")) {			
 			$rules = Module::validateRules("Banners", $request, true);
 			
 			$validator = Validator::make($request->all(), $rules);
@@ -174,14 +198,52 @@ class BannersController extends Controller
 			if ($validator->fails()) {
 				return redirect()->back()->withErrors($validator)->withInput();;
 			}
-			
+			//---------------------------
+				$file = $request->file('image') ;
+				
+	            if(!empty($file))
+	            {
+	              $imageName = uniqid().'.'.$file->getClientOriginalExtension();
+	              $destinationPath = storage_path('/uploads');
+	              $file->move($destinationPath, $imageName);
+	              $upload_data["name"]=$file->getClientOriginalName();
+	              $upload_data["path"]=storage_path().'uploads/'.$imageName;
+	              $upload_data["extension"]=$file->getClientOriginalExtension();
+	              
+	              //$upload=Upload::create($upload_data);
+	              //$request["image"]=$upload_data["name"];
+	              $data['image'] = $imageName;
+	               $update_pass = DB::table('banners')
+                    ->where('id', $id)
+                    ->update($data);
+	            }            
+	            
+			//-------------------------------
+
+	            
+
 			$insert_id = Module::updateRow("Banners", $request, $id);
-			
 			return redirect()->route(config('laraadmin.adminRoute') . '.banners.index');
 			
 		} else {
 			return redirect(config('laraadmin.adminRoute')."/");
 		}
+	}
+
+	public function fileUpload(Request $request) {
+	    $this->validate($request, [
+	        'input_img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+	    ]);
+
+	    if ($request->hasFile('input_img')) {
+	        $image = $request->file('input_img');
+	        $name = time().'.'.$image->getClientOriginalExtension();
+	        $destinationPath = public_path('/images');
+	        $image->move($destinationPath, $name);
+	        $this->save();
+
+	        return back()->with('success','Image Upload successfully');
+	    }
 	}
 
 	/**

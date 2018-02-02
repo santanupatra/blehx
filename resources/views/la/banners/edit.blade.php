@@ -29,15 +29,19 @@
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				{!! Form::model($banner, ['route' => [config('laraadmin.adminRoute') . '.banners.update', $banner->id ], 'method'=>'PUT', 'id' => 'banner-edit-form']) !!}
-					@la_form($module)
-					
+				{!! Form::model($banner, ['route' => [config('laraadmin.adminRoute') . '.banners.update', $banner->id ], 'method'=>'PUT', 'enctype' => 'multipart/form-data', 'id' => 'banner-edit-form']) !!}
+					@la_form($module)					
 					{{--
-					@la_input($module, 'title')
-					@la_input($module, 'image')
+					@la_input($module, 'title')					
 					@la_input($module, 'description')
 					@la_input($module, 'short_order')
 					--}}
+
+					<div class="form-group"><label for="image" style="display:block;">Image* :</label>
+					 <input type="file" name="image" id="image">
+					 <div style="padding-top: 10px"></div>
+					 <img src="{{ URL::asset('../storage/uploads/') }}/{{$banner->image}}" alt="" width="150">	
+					</div>
                     <br>
 					<div class="form-group">
 						{!! Form::submit( 'Update', ['class'=>'btn btn-success']) !!} <button class="btn btn-default pull-right"><a href="{{ url(config('laraadmin.adminRoute') . '/banners') }}">Cancel</a></button>
