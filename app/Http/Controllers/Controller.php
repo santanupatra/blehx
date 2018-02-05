@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use App\Models\Campaign;
 use App\Models\Site_Setting;
 use App\Models\User;
+use Illuminate\Routing\Route;
 use Config;
 use Auth;
 use DB;
@@ -24,6 +25,7 @@ class Controller extends BaseController
         /*$site_setting=Site_Setting::with("imgpath")->first();
         $logo_path=$site_setting->imgpath->path;
         $site_setting->imgpath->path=$img_path.pathinfo($logo_path, PATHINFO_BASENAME);*/
+        //$route->getActionName();
         $user=Auth::user();        
         if(!empty($user))
         {
@@ -60,6 +62,7 @@ class Controller extends BaseController
 
       view()->share('site_setting', $site_setting); 
       view()->share('logged_user', $logged_user);
+      //view()->share('route', $route);
       
   }   
 

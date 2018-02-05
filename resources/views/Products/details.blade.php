@@ -34,18 +34,19 @@
               <h4><strong>For one S9 or one L3+ or one D3</strong></h4>
               <h4><strong>{{ $product_details->price }} USD ( 0.00923570 BTC; 0.06223083 BCH; 0.57322233 LTC; )</strong> </h4>
               <h4><strong>Weight: {{ $product_details->weight }} </strong></h4>
-              <form class="form-inline">
+              {!! Form::open(['url' => 'product/addtocart','method'=>'post', 'class'=>'form-inline']) !!}
+              <input type="hidden" name="product_id" value="{{ $product_details->id }}">
             <div class="form-group">
                   <label for="q">
                   <h4><strong>Quantity</strong></h4>
                   </label>
                   <div id="1" class="input-group input-group-option quantity-wrapper"> <span  class="input-group-addon input-group-addon-remove quantity-remove btn"> <span class="glyphicon glyphicon-minus"></span> </span>
-                <input  id="1inp" type="text" value="6" name="option[]" class="form-control quantity-count" placeholder="1">
+                <input  id="1inp" type="text" value="6" name="quantiety" class="form-control quantity-count" placeholder="1">
                 <span class="input-group-addon input-group-addon-remove quantity-add btn"> <span class="glyphicon glyphicon-plus"></span> </span> </div>
                 </div>
-            <button type="button" class="btn btn-warning quantity-delete"> <span class="glyphicon glyphicon-send"></span> Add to Cart </button>
+            <button type="submit" class="btn btn-warning"> <span class="glyphicon glyphicon-send"></span> Add to Cart </button>
             <p>{{ $product_details->description }}</p>
-          </form>
+            {!! Form::close() !!}
             </div>
       </div>
         </div>

@@ -56,10 +56,9 @@
                     <span>Please enter your login data</span>
                   </h2>
                 </div>
-                {!! Form::open(['url' => 'user/actionsignin','method'=>'post']) !!}  
+                {!! Form::open(['url' => 'user/actionsignin','method'=>'post', 'class' => 'form-horizontal']) !!}  
                 <div class="modal-body">
                   <div class="modal-formdiv">
-                    <form action="#" method="get" class="form-horizontal">
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group-sm">
@@ -102,7 +101,6 @@
 
                     <div class="col-md-2 hidden-xs hidden-sm hidden-lg"></div>
                   </div>
-                    </form>
                   </div>
                 </div>
                 {!! Form::close() !!}

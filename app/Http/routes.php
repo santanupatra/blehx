@@ -27,12 +27,16 @@ Route::group(array('before' => 'auth'), function(){
     Route::get('datacenters','ContentsController@datacenter');
     Route::get('products','ProductsController@index');
     Route::get('product/details/{id}','ProductsController@details');
+
     
 });
 
     Route::group(['middleware' => ['auth']], function(){
     Route::get('/user/logout','UsersController@logout');
     Route::get('/campaign/favorite/{user_id}/{campign_id}','CampignsController@favorite');
+    Route::post('product/addtocart','ProductsController@addtocart');
+    Route::get('product/cartlist','ProductsController@cartlist');
+    
    
 });
 

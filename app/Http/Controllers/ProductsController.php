@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 //use Illuminate\Http\Event;
+use App\Models\User;
 use App\Models\Event;
+use App\Models\Cart;
 use Auth;
 use DB;
+use Session;
 
 class ProductsController extends Controller
 {
@@ -154,6 +157,29 @@ class ProductsController extends Controller
             );
         }
         return Response()->json($response); 
+    }
+
+    public function addtocart(Request $request){  
+            $user=Auth::user();      
+            $product_id = $request->input('product_id');
+            $quantiety = $request->input('quantiety');
+            $user_id = $user->id;
+        
+       
+           $data['user_id'] = $user_id;
+           $data['product_id'] = $product_id;
+           $data['quantiety'] = $quantiety;
+           $data['updated_at'] = 
+           $cart=Cart::create($data);
+           $insertedId = $cart->id; 
+
+           return  redirect()->action('ProductsController@cartlist')->withMessage("Product add successfully.");  
+
+
+    }
+    public function cartlist(){
+        echo "Test";
+        die;
     }
 
     /**
