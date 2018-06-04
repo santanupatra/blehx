@@ -7,12 +7,12 @@
         <div class="col-sm-12">
           <div class="alert alert-warning fade in" style="margin-bottom:35px;">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times-circle"></i></button>
-            <h4>Update: 01/09/2018</h4>
+            <h4>Update: {{$user->updated_at}}</h4>
             <p>Due to growing fees on various networks and some exchanges raising their minimum deposit thresholds we have raised the minimum payout threshold for Bitcoin, Litecoin and Zcash. Click <a href="#" data-toggle="modal" data-target="#ModalPayoutTreshold" title="here">here</a> for a complete list, but for easy reference the changed values are:</p>
-            <ul style="margin-top:10px;">
+           <!--  <ul style="margin-top:10px;">
               <li>Bitcoin 0.005 BTC (was 0.003)</li>
               <li>Ethereum 0.075 ETH (was 0.05)</li>
-            </ul>
+            </ul> -->
           </div>
         </div>
         <div class="col-sm-12"></div>
@@ -24,33 +24,33 @@
       <div class="row">
         <div class="col-sm-2">
           <div class="cmg cmg-1"> <span class="fa fa-btc fa-3x"></span>
-            <div class="cmc"> <b>0.0000 TH/s</b>
+            <div class="cmc"> <b>{{$user->bitcoin}} TH/s</b>
               <p>Bitcoin <small>Hashrate</small> </p>
             </div>
           </div>
         </div>
         <div class="col-sm-2">
           <div class="cmg cmg-2"> <span class="fa fa-cab fa-3x"></span>
-            <div class="cmc"> <b>0.0000 MH/s</b>
+            <div class="cmc"> <b>{{$user->litecoin}} MH/s</b>
               <p>Litecoin <small>Hashrate</small> </p>
             </div>
           </div>
         </div>
-        <div class="col-sm-2">
+        <!-- <div class="col-sm-2">
           <div class="cmg cmg-3"> <span class="fa fa-dashcube fa-3x"></span>
             <div class="cmc"> <b>0.0000 MH/s</b>
               <p>Dash (X11) <small>Hashrate</small> </p>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="col-sm-2">
-          <div class="cmg cmg-4"> <span class="fa fa-flash fa-3x"></span>
-            <div class="cmc"> <b>0.0000 MH/s</b>
+          <div class="cmg cmg-3"> <span class="fa fa-flash fa-3x"></span>
+            <div class="cmc"> <b>{{$user->ethereum}} MH/s</b>
               <p>Ether <small>Hashrate</small> </p>
             </div>
           </div>
         </div>
-        <div class="col-sm-2">
+        <!-- <div class="col-sm-2">
           <div class="cmg cmg-5"> <span class="fa fa-dollar fa-3x"></span>
             <div class="cmc"> <b>0.0000 H/s</b>
               <p>Zcash <small>Hashrate</small> </p>
@@ -63,7 +63,8 @@
               <p>Monero <small>Hashrate</small> </p>
             </div>
           </div>
-        </div>
+        </div> -->
+
         <div class="col-sm-2">&nbsp;</div>
       </div>
     </div>

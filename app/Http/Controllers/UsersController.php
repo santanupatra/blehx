@@ -152,7 +152,83 @@ class UsersController extends Controller
           return redirect()->back()->with('message', 'You have been signup successfull.Please check your Mail!');
         }
     }
-    
+    public function editprofile(){
+        $user=Auth::user();  
+        $user_id = $user->id;
+        $userinfo = DB::table('users')->where('id', $user_id)->first();       
+        return view('Users/editprofile',['userinfo' => $userinfo]); 
+    }
+    public function submitprofile(Request $request){
+            $user=Auth::user();  
+            $user_id = $user->id;
+            $name = $request->input('name');
+            $phone_no = $request->input('phone_no');
+            $dob = $request->input('dob');
+            $address = $request->input('address');
+            $city = $request->input('city');
+            $country = $request->input('country');
+            $zip = $request->input('zip');
+
+
+            $event = User::whereId($user_id)->update([
+                  'name' => $name,
+                  'phone_no' => $phone_no,
+                  'address' => $address,            
+                  'city' => $city,            
+                  'country' => $country,
+                  'zip' => $zip            
+              ]);
+
+                $file = $request->file('image') ;  
+                if(!empty($file))
+                {
+                  $imageName = uniqid().'.'.$file->getClientOriginalExtension();
+                  $destinationPath = storage_path('/uploads/product');
+                  $file->move($destinationPath, $imageName);
+                  $upload_data["name"]=$file->getClientOriginalName();
+                  $upload_data["path"]=storage_path().'uploads/product/'.$imageName;
+                  $upload_data["extension"]=$file->getClientOriginalExtension();
+                  
+                  //$upload=Upload::create($upload_data);
+                  //$request["image"]=$upload_data["name"];
+                  $data['image'] = $imageName;
+                   $update_pass = DB::table('users')
+                    ->where('id', $user_id)
+                    ->update($data);
+                }   
+
+                
+            return  redirect()->action('UsersController@editprofile')->withMessage("Your account details has been successfully saved."); 
+    }
+    public function changepassword(){
+        $user=Auth::user();  
+        $user_id = $user->id;
+        return view('Users/changepassword');
+    }
+
+    public function submitpassword(Request $request){
+        $user=Auth::user();  
+        $user_id = $user->id;
+
+        $old_password = $request->input('old_password');
+        $password = $request->input('password');
+        $conf_password = $request->input('conf_password');
+
+        $user = DB::table('users')->where('id', $user_id)->select('password')->first();        
+        if(bcrypt($old_password) == $user->password){
+            $data['password'] = bcrypt($password);
+                 $update_pass = DB::table('users')
+                  ->where('id', $user_id)
+                  ->update($data);
+
+                  return  redirect()->action('UsersController@changepassword')->withMessage("Password change successfully."); 
+              }  
+        else{
+          return  redirect()->action('UsersController@changepassword')->withMessage("Old password is not match."); 
+        }
+
+    }
+
     function active($id)
     {
         $id= base64_decode($id);
@@ -188,7 +264,7 @@ class UsersController extends Controller
             $user=Auth::user();
             if($user->is_active)
             {
-              if($user->type=='S')
+              if($user->type=='Seller')
               {
                  return  redirect()->action('UsersController@sellerDashboard')->withMessage("You have been Logged in successfully!");           
               }
@@ -242,6 +318,14 @@ class UsersController extends Controller
        return view('Users/signincamp');
     }
     public function userDashboard(){
+          $user_dtl=Auth::user();
+          $user=User::where("id","=",$user_dtl->id)->first();
+          
+          return view('Users/user_dashboard',['user'=>$user]);
+
+    }
+
+    public function sellerDashboard(){
       return view('Users/user_dashboard');
     }
     

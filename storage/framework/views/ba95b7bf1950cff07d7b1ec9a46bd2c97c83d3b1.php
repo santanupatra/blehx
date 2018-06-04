@@ -55,8 +55,7 @@
 
 			<div class="modal-body">
 				<div class="box-body">
-                    <?php echo LAFormMaker::form($module); ?>
-					
+                    <?php echo LAFormMaker::form($module); ?>					
 					<?php /*
 					<?php echo LAFormMaker::input($module, 'title'); ?>					
 					<?php echo LAFormMaker::input($module, 'description'); ?>

@@ -34,8 +34,6 @@
 					<?php echo LAFormMaker::input($module, 'name'); ?>
 					<?php echo LAFormMaker::input($module, 'sku'); ?>
 					<?php echo LAFormMaker::input($module, 'weight'); ?>
-					<?php echo LAFormMaker::input($module, 'price'); ?>
-					<?php echo LAFormMaker::input($module, 'quantity'); ?>
 					<?php echo LAFormMaker::input($module, 'category_id'); ?>
 					<?php echo LAFormMaker::input($module, 'status'); ?>					
 					*/ ?>

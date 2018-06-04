@@ -39,7 +39,7 @@
           <?php foreach( $products as $pro ): ?>
             <div class="col-md-3 col-sm-12 col-xs-12">
               <div class="new_product-item">
-                <div class="thumbnail"> <img src="<?php echo e(URL::asset('../storage/uploads/product')); ?>/<?php echo e($pro->image); ?>" alt="" class="img-responsive center-block">
+                <div class="thumbnail"> <img src="<?php echo e(URL::asset('../storage/uploads/product')); ?>/<?php echo e($pro->image); ?>" alt="" class="img-responsive center-block" style="width: 268px; height: 224px">
                     <div class="caption">
                   <h3 class="h4 text-center text-uppercase"><?php echo e($pro->name); ?></h3>
                  <!--  <p class="h5 text-center">Shipping:March 15-22 </p> -->

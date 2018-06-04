@@ -23,7 +23,7 @@ class ServicesController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'name';
-	public $listing_cols = ['id', 'name', 'description', 'price'];
+	public $listing_cols = ['id', 'name', 'hashrate', 'category_id', 'short_description'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns

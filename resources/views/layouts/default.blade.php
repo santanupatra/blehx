@@ -18,10 +18,10 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap-theme.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/slider.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('assets/font-awesome-4.7.0/css/font-awesome.min.css') }}" type="text/css">
-    <link rel="icon" href="{{ URL::asset('assets/img/fav-icon.png') }}" type="image/png" sizes="32x32">
-    <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}" type="text/css">
+    <link rel="icon" href="{{ URL::asset('assets/img/fav-icon.png') }}" type="image/png" sizes="32x32">   
     <link rel="stylesheet" href="{{ URL::asset('assets/css/tabbed.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ URL::asset('assets/css/blue.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/custom.css') }}" type="text/css">
      <script type="text/javascript" src="{{ URL::asset('assets/js/jquery-1.10.1.min.js') }}"></script>
     <style type="text/css">
       .scrollup{

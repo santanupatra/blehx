@@ -23,7 +23,7 @@ class Service_CategoriesController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'name';
-	public $listing_cols = ['id', 'description', 'actiove', 'name'];
+	public $listing_cols = ['id', 'name', 'active'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns

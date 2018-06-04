@@ -35,8 +35,6 @@
 					@la_input($module, 'name')
 					@la_input($module, 'sku')
 					@la_input($module, 'weight')
-					@la_input($module, 'price')
-					@la_input($module, 'quantity')
 					@la_input($module, 'category_id')
 					@la_input($module, 'status')					
 					--}}

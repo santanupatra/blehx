@@ -1,5 +1,3 @@
-
-
 @extends('layouts.default')
 @section('content')
 <!-- <section class="login-bnr">
@@ -22,298 +20,74 @@
    {{ session()->get('message') }}
 </div>
 @endif
-<section class="pt-5 pb-5">
-   <div class="container">
-      <div class="row justify-content-md-center">
-         <div class="col-lg-4">
-           <div class="login-content">
-             <h6 class="mb-3 font-weight-bold font-18">Log in with your account</h6>
-             {!! Form::open(['url' => 'user/actionsignin','method'=>'post']) !!}
-             <div class="form-row">
-                <div class="col-12 mb-4">
-                   <input type="email" class="form-control" placeholder="E-mail Address" required="" name="email">
+<div class="container">  
+    
+    <!-- hash power -->
+    <div id="current-mining" class="mma mma-bc1">
+      <div style="height: 30px"></div>
+      <div class="row">
+        <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h2 class="modal-title">Login
+                <span>Please enter your login data</span>
+              </h2>
+            </div>
+            {!! Form::open(['url' => 'user/actionsignin','method'=>'post', 'class' => 'form-horizontal']) !!}  
+            <div class="modal-body">
+              <div class="modal-formdiv">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group-sm">
+                        <label for="e">Email</label>
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                            <i class="fa fa-envelope"></i>
+                          </div>
+                          <input type="email" name="email" id="email" placeholder="Email-id..."
+                          class="form-control" required="required">
+                        </div>
+                      </div>
+                    </div>
+
+                <div class="col-md-6">
+                      <div class="form-group-sm">
+                        <label for="p">Password</label>
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                            <i class="fa fa-lock"></i>
+                          </div>
+                          <input type="Password" name="password" id="password" placeholder="Type Password..." class="form-control" required="required">
+                        </div>
+                      </div>
                 </div>
-                <div class="col-12  mb-2">
-                   <input type="password" class="form-control" placeholder="Password" required="" name="password">
-                </div>
-                <div class="col-12  mb-2">
-                  <a href="#" class="font-12"> Forgot your password? </a>
-                </div>
-                <div class="col-12  mb-2">
-                   <button class="btn btn-danger btn-block bg-red font-14 font-weight-bold" style=" cursor:pointer;">Log me in!</button>
-                </div>
-                <div class="col-12 mb-2">
-                  <div class="form-check">
-                    <label class="form-check-label font-12 d-flex">
-                      <input type="checkbox" class="form-check-input mr-2">
-                      Remember me
-                    </label>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group-sm">
+                    <button type="submit" class="btn new-btn1 btn-sm" data-toggle="modal" >Submit</button>
                   </div>
                 </div>
-                <div class="col-12 mb-4">
-                   <div class="row">
-                     <div class="col-5">
-                       <hr class="mt-2 mb-2">
-                     </div>
-                     <div class="col text-center font-12">
-                       or
-                     </div>
-                     <div class="col-5">
-                       <hr class="mt-2 mb-2">
-                     </div>
-                   </div>
+                <div class="col-md-6">
+                  <div class="form-group-sm">
+                    <h5 class="h5"><a href="#">
+                    <i class="fa fa-hand-o-right"></i> Lost your password? | <u><a href="#" data-toggle="modal" data-target="#myModal1"> Sign Up</a></u></a></h5>
+                  </div>
                 </div>
-                <div class="col-12 mb-3">
-                   <button class="g-signin btn btn-danger bg-red btn-block"
-                     type="button"      
-                     data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email"
-                     data-requestvisibleactions="http://schemas.google.com/AddActivity"
-                     data-clientId="234452095110-0vktl9j31ficjt69qg5lvj1kmhbdqnsi.apps.googleusercontent.com"
-                     data-accesstype="offline"
-                     data-callback="mycoddeSignIn"
-                     data-theme="dark"
-                     data-cookiepolicy="single_host_origin" 
-                     ><i class="icon ion-social-googleplus d-inline-block mr-2"></i>Login with Google Plus</button>
-                </div>
-                <div class="col-12 mb-2">
-                   <a class="btn btn-primary faceBookBtn btn-block" href="javascript:void(0)" onclick="login();"><i class="icon ion-social-facebook d-inline-block mr-2"></i>Login with Facebook</a>
-                   <p class="font-12 text-center">We'll never post anything on Facebook <br>
-                      without your permission.
-                    </p>
-                </div>
-                <div class="col-12  mb-4 text-center">
-                  <hr class="mt-2 mb-3">
-                   <p class="m-0 font-theme font-15 latolight">Not a member yet? <a href="{{URL::asset("/")}}signup" class="font-theme">Register now</a></p>
-                </div>
-             </div>
-             {!! Form::close() !!}
-           </div>
-         </div>
-      </div>
-   </div>
-</section>
-<script>
-   window.fbAsyncInit = function() {
-   FB.init({
-   appId: '192920864584099',
-   status: true,
-   cookie: true,
-   xfbml: true
-   });
-   };
-   // Load the SDK asynchronously
-   (function(d){
-   var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-   if (d.getElementById(id)) {return;}
-   js = d.createElement('script'); js.id = id; js.async = true;
-   js.src = "//connect.facebook.net/en_US/all.js";
-   ref.parentNode.insertBefore(js, ref);
-   }(document));
-   function login() {
-   FB.login(function (response) {
-                //console.log(response);
-                if (!response || response.status !== 'connected') {
-                    alert('Failed');
-                } else {
-                    FB.api('/me', {fields: 'first_name,last_name,email'}, function (response) {
-                        if(response.email=='')
-                        {
-                        	alert("Sorry you cannot register or login as your fb email is not public.");
-                        }
-                        else{
-                            var fbdata={
-                            email:response.email,
-                            social_id:response.id,
-                            first_name:response.first_name,
-                            last_name:response.last_name,
-                            social_type:'fb',
-                            _token: "{{ csrf_token() }}",
-                            };
-                            $.post("{{URL::asset('/')}}user/sociallogin",fbdata,function(data){
-                              if(data.Ack==1)
-                              {
 
-                               $("#user_id").attr("value",data.user_id);
-                               if(data.ShowModal==1)
-                               {
-                                   $("#usertype").modal("show");
-                               }
-                               else
-                               {
-                                  if(data.type=='U')
-                                  {
-                                    location.href="{{URL::asset('/')}}profile"
-                                  }
-                                  else
-                                  {
-                                    location.href="{{URL::asset('/')}}charityprofile"
-                                  }
-                               }
-
-                             }
-                            },"json");
-
-
-
-                        }
-                    });
-                }
-            }, {scope: 'email'});
-
-
-
-
-
-
-   }
-
-   $(document).ready(function(){
-   $("#usertypeform").submit(function(event){
-   event.preventDefault();
-   $.post("{{URL::asset('/')}}settype",$(this).serialize(),function(out){
-   if(out.Ack==1)
-   {
-
-       if(out.usertype=='U')
-       {
-             location.href="{{URL::asset('/')}}profile"
-       }
-       else
-       {
-            location.href="{{URL::asset('/')}}charityprofile"
-       }
-
-   }
-   },"json");
-
-   });
-
-   });
-
-
-   (function() {
-    var po = document.createElement('script');
-    po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://plus.google.com/js/client:plusone.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(po, s);
-
-    
-   })();
-
-
-
-</script>
-<script type="text/javascript">
-   var gpclass = (function(){
-
-   //Defining Class Variables here
-   var response = undefined;
-   return {
-       //Class functions / Objects
-
-       mycoddeSignIn:function(response){
-           // The user is signed in
-           if (response['access_token']) {
-
-               //Get User Info from Google Plus API
-               gapi.client.load('plus','v1',this.getUserInformation);
-
-           } else if (response['error']) {
-               // There was an error, which means the user is not signed in.
-               //alert('There was an error: ' + authResult['error']);
-           }
-       },
-
-       getUserInformation: function(){
-           var request = gapi.client.plus.people.get( {'userId' : 'me'} );
-           request.execute( function(profile) {
-               var email = profile['emails'].filter(function(v) {
-                   return v.type === 'account'; // Filter out the primary email
-               })[0].value;
-               if(email!='')
-               {
-                var fbdata={
-                           email:email,
-                           social_id:profile.id,
-                           first_name:profile.name.givenName,
-                           last_name:profile.name.familyName,
-                           social_type:'g',
-                           _token: "{{ csrf_token() }}",
-                           };
-                console.log(fbdata);
-                            $.post("{{URL::asset('/')}}user/sociallogin",fbdata,function(data){
-                             if(data.Ack==1)
-                             {
-
-                              $("#user_id").attr("value",data.user_id);
-                              if(data.ShowModal==1)
-                              {
-                                  $("#usertype").modal("show");
-                              }
-                              else
-                              {
-                                 if(data.type=='U')
-                                 {
-                                   location.href="{{URL::asset('/')}}profile"
-                                 }
-                                 else
-                                 {
-                                   location.href="{{URL::asset('/')}}charityprofile"
-                                 }
-                              }
-
-                            }
-                           },"json");
-
-               }
-               else
-               {
-                 alert("Sorry you cannot register or login as your G+ email is not public.");
-
-
-               }
-
-
-
-
-
-           });
-       }
-
-   }; //End of Return
-   })();
-
-   function mycoddeSignIn(gpSignInResponse){
-       gpclass.mycoddeSignIn(gpSignInResponse);
-   }
-</script>
-<!-- Trigger the modal with a button -->
-<!-- Modal -->
-<div class="modal fade" id="usertype" role="dialog">
-   <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-         <div class="modal-header">
-            <h4 class="modal-title">Signup Modal</h4>
-         </div>
-         <form method="post" id="usertypeform">
-            <input type="hidden" name="_token" value="{{csrf_token()}}">
-            <input type="hidden" name="id"  id="user_id">
-            <div class="modal-body">
-               <div class="radio-inline">
-                  <label><input type="radio" value="C" name="type" required=""> Signup as Charity</label>
-               </div>
-               <div class="radio-inline">
-                  <label><input type="radio" value="U" name="type" required=""> Signup as Doner</label>
-               </div>
+                <div class="col-md-2 hidden-xs hidden-sm hidden-lg"></div>
+              </div>
+              </div>
             </div>
+            {!! Form::close() !!}
             <div class="modal-footer">
-               <button type="submit" class="btn btn-danger btn-block bg-red font-14 font-weight-bold" style=" cursor:pointer;width:10%;">Go</button>
-               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <!--<a href="#" class="btn btn-primary text-uppercase text-center">sign in</a>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
             </div>
-         </form>
+          </div>
       </div>
-   </div>
-</div>
+      <div style="height: 30px"></div>
+    </div>
+</div>  
 @stop

@@ -18,9 +18,10 @@ class CreateServiceCategoriesTable extends Migration
     public function up()
     {
         Module::generate("Service_categories", 'service_categories', 'name', 'fa-align-justify', [
-            ["description", "Description", "Textarea", false, "", 0, 0, false],
-            ["actiove", "Active", "Dropdown", false, "yes", 0, 0, true, ["yes","no"]],
+            ["hashrate_type", "Hashrate Type", "TextField", false, "", 1, 50, true],
             ["name", "Name", "TextField", false, "", 0, 256, true],
+            ["description", "Description", "Textarea", false, "", 0, 0, false],
+            ["active", "Active", "Dropdown", false, "yes", 0, 0, true, ["yes","no"]],
         ]);
 		
 		/*
