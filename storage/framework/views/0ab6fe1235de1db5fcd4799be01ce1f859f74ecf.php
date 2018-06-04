@@ -11,6 +11,9 @@
 <link rel="icon" href="<?php echo e(URL::asset('assets/img/fav-icon.png')); ?>" type="image/png" sizes="32x32">
 <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/custom.css')); ?>" type="text/css">
 <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/style_dash.min.css')); ?>" type="text/css">
+
+<script src="<?php echo e(URL::asset('assets/js/jquery-1.10.1.min.js')); ?>"></script> 
+<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script> 
 <style type="text/css">
 .scrollup {
   width: 40px;
@@ -52,22 +55,34 @@
     </div>
     <div class="collapse navbar-collapse" id="main-menu">
       <div class="nav-user-info">
-        <h2>Welcome Back </h2>
+        <h2>Welcome Back </h2>        
         <span class="fa fa-user"></span> </div>
       <ul class="nav navbar-nav">
         <li class="active"> <a class="navbar-link" href="#"><span class="fa fa-dashboard"></span>Dashboard</a> </li>
-        <li> <a class="navbar-link" href="#"><span class="fa fa-sliders"></span>Mining Allocation</a> </li>
+        <li> <a class="navbar-link" href="<?php echo e(URL::to('')); ?>/user/editprofile"><span class="fa fa-sliders"></span>Edit Profile</a> </li>
+        <li> <a class="navbar-link" href="<?php echo e(URL::to('')); ?>/user/changepassword"><span class="fa fa-sliders"></span>Change Password</a> </li>
+        <!-- <li> <a class="navbar-link" href="#"><span class="fa fa-sliders"></span>Mining Allocation</a> </li>
         <li> <a class="navbar-link" href="#"><span class="fa fa-download"></span>Payouts</a> </li>
-        <li> <a class="navbar-link" href="#"> <span class="fa fa-th-list"></span>Bonus Payouts</a> </li>
+        <li> <a class="navbar-link" href="#"> <span class="fa fa-th-list"></span>Bonus Payouts</a> </li> -->
         <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="fa fa-address-book"></span> My Account <i class="caret"></i></a>
+          <?php
+            if($logged_user->type == 'Seller'){
+          ?>
           <ul class="dropdown-menu">
-            <li> <a href="#"><span class="fa fa-cogs"></span> Settings</a> </li>
-            <li> <a href="#"><span class="fa fa-star"></span> Affiliate</a> </li>
-            <li> <a href="#"><span class="fa fa-comments"></span> Contact Customer Service</a> </li>
+            <li> <a href="<?php echo e(URL::to('')); ?>/product/create"><span class="fa fa-cogs"></span> Add Product</a> </li>
+            <li> <a href="<?php echo e(URL::to('')); ?>/product/list"><span class="fa fa-star"></span> List Product</a> </li>
+
+             <li> <a href="<?php echo e(URL::to('')); ?>/service/create"><span class="fa fa-cogs"></span> Add Service</a> </li>
+            <li> <a href="<?php echo e(URL::to('')); ?>/service/list"><span class="fa fa-star"></span> List Service</a> </li>
+            <li> <a class="navbar-link" href="<?php echo e(URL::to('')); ?>/product_order"><span class="fa fa-th-list"></span>Product orders</a> </li>
+            <li> <a class="navbar-link" href="<?php echo e(URL::to('')); ?>/service_order"><span class="fa fa-th-list"></span>Service orders</a> </li>
           </ul>
+          <?php
+            }
+          ?>    
         </li>
-        <li> <a class="navbar-link" href="#"><span class="fa fa-th-list"></span> My orders</a> </li>
-        <li> <a class="navbar-link" href="#"><span class="fa fa-flash"></span> Buy Hashpower</a> </li>
+        <li> <a class="navbar-link" href="<?php echo e(URL::to('')); ?>/myorder"><span class="fa fa-th-list"></span> My orders</a> </li>
+        <!-- <li> <a class="navbar-link" href="#"><span class="fa fa-flash"></span> Buy Hashpower</a> </li> -->
         <li class="emptys">&nbsp;</li>
       </ul>
     </div>
@@ -78,8 +93,7 @@
 <?php echo $__env->yieldContent('content'); ?>
 
 <a href="#" class="scrollup" style="display: none;">Scroll</a> 
-<script src="<?php echo e(URL::asset('assets/js/jquery-1.10.1.min.js')); ?>"></script> 
-<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script> 
+
 <script>
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();

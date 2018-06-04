@@ -23,7 +23,7 @@ class UsersController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'name';
-	public $listing_cols = ['id', 'name', 'context_id', 'email', 'password', 'phone_no', 'type', 'otp'];
+	public $listing_cols = ['id', 'name', 'type', 'email', 'phone_no'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns

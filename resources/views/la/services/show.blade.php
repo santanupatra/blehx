@@ -108,8 +108,10 @@
 					</div>
 					<div class="panel-body">
 						@la_display($module, 'name')
+						@la_display($module, 'hashrate')
+						@la_display($module, 'category_id')
+						@la_display($module, 'short_description')
 						@la_display($module, 'description')
-						@la_display($module, 'price')
 					</div>
 				</div>
 			</div>

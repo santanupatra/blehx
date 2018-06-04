@@ -18,10 +18,11 @@ class CreateServicesTable extends Migration
     public function up()
     {
         Module::generate("Services", 'services', 'name', 'fa-eur', [
-            ["category_id", "Category", "Dropdown", false, "", 0, 0, true, "@service_categories"],
             ["name", "name", "Name", false, "", 5, 255, true],
+            ["hashrate", "Hashrate", "Integer", false, "0", 1, 11000, false],
+            ["category_id", "Category", "Dropdown", false, "", 0, 0, true, "@service_categories"],
+            ["short_description", "Short Decsription", "TextField", false, "", 0, 256, false],
             ["description", "Description", "Textarea", false, "", 0, 0, true],
-            ["price", "Price", "Decimal", false, "", 1, 200, false],
         ]);
 		
 		/*

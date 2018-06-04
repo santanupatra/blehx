@@ -23,7 +23,7 @@ class ProductsController extends Controller
 {
 	public $show_action = true;
 	public $view_col = 'name';
-	public $listing_cols = ['id', 'name', 'sku', 'weight', 'price', 'description', 'quantity', 'category_id', 'status', 'payment', 'overview', 'warranty'];
+	public $listing_cols = ['id', 'name', 'sku', 'weight', 'category_id', 'status'];
 	
 	public function __construct() {
 		// Field Access of Listing Columns

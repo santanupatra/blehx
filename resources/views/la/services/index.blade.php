@@ -60,8 +60,10 @@
 					
 					{{--
 					@la_input($module, 'name')
+					@la_input($module, 'hashrate')
+					@la_input($module, 'category_id')
+					@la_input($module, 'short_description')
 					@la_input($module, 'description')
-					@la_input($module, 'price')
 					--}}
 				</div>
 			</div>

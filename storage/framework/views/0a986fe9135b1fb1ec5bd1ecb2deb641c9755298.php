@@ -95,7 +95,7 @@
                     <div class="col-md-6">
                       <div class="form-group-sm">
                         <h5 class="h5"><a href="#">
-                        <i class="fa fa-hand-o-right"></i> Lost your password? | <u>Sign Up</u></a></h5>
+                        <i class="fa fa-hand-o-right"></i> Lost your password? | <u><a href="#" data-toggle="modal" data-target="#myModal1"> Sign Up</a></u></a></h5>
                       </div>
                     </div>
 
@@ -133,17 +133,29 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group-sm">
-                            <label for="e1">Email</label>
+                            <label for="e1">User Type</label>
                             <div class="input-group">
-                              <div class="input-group-addon">
-                                <i class="fa fa-envelope"></i>
-                              </div>                              
-                              <input type="email" class="form-control" placeholder="Email-id..." required name="email" id="email">
+                              <input type="radio" name="type" value="B" checked="checked"> Buyer
+                              <input type="radio" name="type" value="S"> Seller
                             </div>
                           </div>
                         </div>
 
                     <div class="col-md-6">
+                      <div class="form-group-sm">
+                        <label for="e1">Email</label>
+                        <div class="input-group">
+                          <div class="input-group-addon">
+                            <i class="fa fa-envelope"></i>
+                          </div>                              
+                          <input type="email" class="form-control" placeholder="Email-id..." required name="email" id="email">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                  <div class="col-md-6">
                           <div class="form-group-sm">
                             <label for="p1">Password</label>
                             <div class="input-group">
@@ -154,9 +166,6 @@
                             </div>
                           </div>
                     </div>
-                  </div>
-
-                  <div class="row">
                     <div class="col-md-6">
                           <div class="form-group-sm">
                             <label for="rp1">Repeat Password</label>
@@ -223,7 +232,7 @@
               <ul class="nav navbar-nav">
                 <li class="active_new"><a href="<?php echo e(URL::to('')); ?>/home">home</a></li>
                 <li><a href="#">blog</a></li>
-                <li><a href="<?php echo e(URL::to('')); ?>/prising">prising</a></li>
+                <li><a href="<?php echo e(URL::to('')); ?>/allservice">prising</a></li>
                 <li><a href="<?php echo e(URL::to('')); ?>/our_offer">our offer</a></li>
                 <li><a href="<?php echo e(URL::to('')); ?>/products">Products</a></li>            
                 <li><a href="#">press</a></li>

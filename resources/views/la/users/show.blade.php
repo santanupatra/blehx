@@ -108,12 +108,11 @@
 					</div>
 					<div class="panel-body">
 						@la_display($module, 'name')
-						@la_display($module, 'context_id')
+						@la_display($module, 'type')
 						@la_display($module, 'email')
 						@la_display($module, 'password')
-						@la_display($module, 'phone_no')
-						@la_display($module, 'type')
 						@la_display($module, 'otp')
+						@la_display($module, 'phone_no')
 					</div>
 				</div>
 			</div>

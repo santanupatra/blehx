@@ -4,12 +4,21 @@ Route::group(['prefix' => 'api'], function () {
     Route::Post('/login', 'API\UsersController@login');
   	Route::Post('/signup', 'API\UsersController@signup');
     Route::Post('/signupotp', 'API\UsersController@signupOtp');
+    Route::Post('/orderhistory', 'API\UsersController@orderhistory');
+    Route::Post('/orderdetails', 'API\UsersController@orderdetails');
+    Route::Post('/userdetails', 'API\UsersController@userdetails');
+    
+
     Route::Get('/category', 'API\ProductsController@productCategory');
     Route::Post('/veriefyotp', 'API\UsersController@veriefyotp');
     Route::Post('/product', 'API\ProductsController@productList');
     Route::Post('/productDetails', 'API\ProductsController@productDetails');
     Route::Post('/productAddCart', 'API\ProductsController@productAddCart');
     Route::Post('/productCart', 'API\ProductsController@productCart');
+    Route::Post('/productCartRemove', 'API\ProductsController@productCartRemove');
+    Route::Post('/addressupdate', 'API\ProductsController@addressupdate');
+    Route::Post('/order', 'API\ProductsController@order');
+    Route::Post('/service', 'API\ProductsController@serviceList');
     
     
     

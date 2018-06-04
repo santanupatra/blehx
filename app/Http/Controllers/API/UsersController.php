@@ -172,6 +172,59 @@ public function signupOtp(Request $request)
         
     }
 
+public function signupresendOtp(Request $request)
+    {
+        
+
+         $phone_no = $request->input('phone_no');
+        $otp = '4321'; 
+        //echo $phone_no;exit;       
+        try {
+
+             $user = DB::table('users')
+                ->where('phone_no', $phone_no)
+                    ->update(['otp' => $otp
+                             ]);
+
+
+
+            // $user = User::create([
+            //     'phone_no' => $phone_no,
+            //        'otp' =>$otp            
+            // ]);
+            //echo $user->id;
+            if(isset($user->id) && !empty($user->id)){
+                $response = array(
+                    'status' => 'success',
+                    'status_code' => 200,
+                    'data' => $user,
+                    'message' => 'Successfully registered',
+                );
+                return Response()->json($response);
+            }else{
+                $response = array(
+                    'status' => 'failure',
+                    'status_code' => 401,
+                    'data' => '',
+                    'message' => 'Registration failed',
+                );
+                //echo 'No';
+                return Response()->json($response);
+            }
+        }catch(\Exception $exception){     
+            //print_r($exception);
+           $response = array(
+                'status' => 'failure',
+                'status_code' => 401,
+                'data' => '',
+                'message' => 'phone no already exist',
+            );
+            //echo 'No';
+            return Response()->json($response);
+        }
+        
+    }
+
 
 public function veriefyotp(Request $request)
     {
@@ -203,5 +256,91 @@ public function veriefyotp(Request $request)
             return Response()->json($response);
         }
     }
+
+public function userdetails(Request $request)
+{
+    $user_id = $request->input('user_id');
+            
+$userdetails = DB::table('users')->select('users.*')->where(['users.id' => $user_id])->get();
+       
+       // print_r($orderdetails);exit;
+
+        if(count($userdetails) > 0) {
+          $response = array(
+                'status' => 'success',
+                'status_code' => 200,
+                'data' => $userdetails,
+                'message' => '',
+            );  
+        }
+        else{
+             $response = array(
+                'status' => 'failed',
+                'status_code' => 200,
+                'data' => '',
+                'message' => 'No Order Available',
+            );
+        }     
+        return Response()->json($response); 
+}
+
+
+public function orderhistory(Request $request){
+       
+           
+             $user_id = $request->input('user_id');
+            
+$orderdetails = DB::table('orders')->select('orders.*')->where(['orders.user_id' => $user_id])->get();
+       
+       // print_r($orderdetails);exit;
+
+        if(count($orderdetails) > 0) {
+          $response = array(
+                'status' => 'success',
+                'status_code' => 200,
+                'data' => $orderdetails,
+                'message' => '',
+            );  
+        }
+        else{
+             $response = array(
+                'status' => 'failed',
+                'status_code' => 200,
+                'data' => '',
+                'message' => 'No Order Available',
+            );
+        }     
+        return Response()->json($response);    
+    }
+
+
+public function orderdetails(Request $request){
+       
+           
+             $order_id = $request->input('order_id');
+            
+$orderdetail = DB::table('orderitems')->select('orderitems.*', 'products.*')->join('products','orderitems.product_id','=','products.id')->where(['orderitems.order_id' => $order_id])->get();
+       // $cartdetails = DB::table('carts')->select('carts.*', 'products.*','carts.id as crid','carts.user_id as uid','carts.quantiety as crtQuantity')->join('products','carts.product_id','=','products.id')->where(['carts.user_id' => $user_id])->get();
+      // print_r($orderdetail);exit;
+
+        if(count($orderdetail) > 0) {
+          $response = array(
+                'status' => 'success',
+                'status_code' => 200,
+                'data' => $orderdetail,
+                'message' => '',
+            );  
+        }
+        else{
+             $response = array(
+                'status' => 'failed',
+                'status_code' => 200,
+                'data' => '',
+                'message' => 'No Order Available',
+            );
+        }     
+        return Response()->json($response);    
+    }
+
 
 }

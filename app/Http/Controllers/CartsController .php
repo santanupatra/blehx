@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 //use Illuminate\Http\Event;
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Cart;
 use Auth;
 use DB;
 use Session;

@@ -107,9 +107,9 @@
 						<h4>General Info</h4>
 					</div>
 					<div class="panel-body">
-						@la_display($module, 'description')
-						@la_display($module, 'actiove')
 						@la_display($module, 'name')
+						@la_display($module, 'description')
+						@la_display($module, 'active')
 					</div>
 				</div>
 			</div>
